@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId}/reports/{reportId} {
+      function isOwner() {
+        return request.auth != null && request.auth.uid == userId;
+      }
+
+      // Client-created records are upload metadata only. Trusted processing
+      // services should write OCR/AI results using the Admin SDK.
+      allow read: if isOwner();
+      allow create: if isOwner()
+        && request.resource.data.keys().hasOnly([
+          'id', 'ownerUid', 'storagePath', 'originalFileName',
+          'contentType', 'sizeBytes', 'status', 'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.id == reportId
+        && request.resource.data.ownerUid == userId
+        && request.resource.data.storagePath is string
+        && request.resource.data.storagePath.matches(
+          'users/' + userId + '/reports/' + reportId + '/[^/]+'
+        )
+        && request.resource.data.originalFileName is string
+        && request.resource.data.originalFileName.size() > 0
+        && request.resource.data.originalFileName.size() <= 180
+        && request.resource.data.contentType in [
+          'application/pdf', 'image/jpeg', 'image/png'
+        ]
+        && request.resource.data.sizeBytes is int
+        && request.resource.data.sizeBytes > 0
+        && request.resource.data.sizeBytes <= 15728640
+        && request.resource.data.status == 'uploaded'
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+      allow update: if false;
+      allow delete: if isOwner();
+    }
+  }
+}
