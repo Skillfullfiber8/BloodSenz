@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "968965595447",
+    "project_id": "bloodsenz-fd314",
+    "storage_bucket": "bloodsenz-fd314.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968965595447:android:f9ec96fa3ee7e6b0063ab2",
+        "android_client_info": {
+          "package_name": "com.bloodsenz.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "968965595447-bj47opamisgk56o3stg6lld15j9of8s3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYJES-nMeqnYk8ywRY1A3bL6xUjSspACQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "968965595447-bj47opamisgk56o3stg6lld15j9of8s3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "968965595447-hj6bojrsrlcm2ih051aan689fdcfbd8q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bloodsenz.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
